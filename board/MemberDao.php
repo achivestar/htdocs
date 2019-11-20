@@ -8,8 +8,10 @@ class MemberDao
     public function __construct()
     {
         try {
-            $this->db = new PDO("myssql:host=localhost;dbname=phpdb","root","");
+
+            $this->db = new PDO("mysql:host=localhost;dbname=php_db","root","");
             $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $this->db->exec("set names utf8"); // 한글 깨짐 방지
         } catch (PDOException $exception) {
             exit($exception->getMessage());
         }
@@ -20,6 +22,7 @@ class MemberDao
             $query = $this->db->prepare("SELECT * FROM member WHERE id = :id");
             $query->bindValue(":id",$id,PDO::PARAM_STR);
             $query->execute();
+
             $result = $query->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             exit($exception->getMessage());

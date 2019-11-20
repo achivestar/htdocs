@@ -8,7 +8,7 @@
     }
 
     function requestValue($name){
-        return isset($_REQUEST[name])? $_REQUEST[$name] : "";
+        return isset($_REQUEST[$name])? $_REQUEST[$name] : "";
     }
 
     function sessionVar($name){
