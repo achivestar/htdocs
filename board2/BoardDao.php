@@ -53,7 +53,7 @@ class BoardDao
     // $start번부터 $rows 개의 게시글 데이터 반환 (2차원배열)
     public function getManyMsgs($start, $rows){
         try {
-            $query = $this->db->prepare("SELECT * FROM board order by num desc LIMIT :start. :rows");
+            $query = $this->db->prepare("SELECT * FROM board order by num desc LIMIT :start , :rows");
             $query->bindValue(":start",$start,PDO::PARAM_INT);
             $query->bindValue(":rows",$rows,PDO::PARAM_INT);
             $query->execute();
@@ -62,6 +62,8 @@ class BoardDao
         } catch (PDOException $exception) {
             exit($exception->getMessage());
         }
+
+        return $msgs;
     }
 
     // 새글을  DB에 추가
