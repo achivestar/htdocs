@@ -86,11 +86,11 @@ class BoardDao
         try {
             $query = $this->db->prepare("UPDATE board SET writer= :writer, title=:title, content=:content, regtime=:regtime WHERE num=:num");
             $regtime = date("Y-m-d H:i:s");
-            $query->bindValue(":writer".$writer,PDO::PARAM_STR);
+            $query->bindValue(":writer",$writer,PDO::PARAM_STR);
             $query->bindValue(":title",$title,PDO::PARAM_STR);
             $query->bindValue(":content",$content,PDO::PARAM_STR);
-            $query->bindValue(":regtime ",$regtime,PDO::PARAM_STR);
-            $query->bindValue(":num".$num.PDO::PARAM_INT);
+            $query->bindValue(":regtime",$regtime,PDO::PARAM_STR);
+            $query->bindValue(":num",$num,PDO::PARAM_INT);
             $query->execute();
         } catch (PDOException $exception) {
             exit($exception->getMessage());
@@ -101,7 +101,7 @@ class BoardDao
     public function deleteMsg($num){
         try {
             $query = $this->db->prepare("DELETE FROM board WHERE num = :num");
-            $query->bindValue(":num",$num.PDO::PARAM_INT);
+            $query->bindValue(":num",$num,PDO::PARAM_INT);
             $query->execute();
         } catch (PDOException $exception) {
             exit($exception->getMessage());
